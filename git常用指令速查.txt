@@ -1,0 +1,77 @@
+目前掌握的点，今后继续补充
+一、常用指令
+1、git add -- 添加至暂存区(当前分支)
+     git status -- 查看当前仓库状态，红字显示未添加的有变更的文件，可选参数-s简短输出
+     git log (--online) + (--graph) -- 查看(简洁)提交日志，--graph参数可以更清晰显示分支
+     git log --author=zhangweiyi --online -- 查看用户zhangweiyi提交的内容
+
+2、git branch -- 列出所有分支
+常用：git branch + (-d) + <分支名> 
+       #创建(删除)
+
+3、git checkout (-b) + <分支名> -- (创建并)切换至该分支
+
+4、git clean -- 清除工作区未跟踪文件
+
+5、git clone -- 克隆版本库（包括版本变化）
+常用：git clone + <远程仓库url> + (<本地文件目录名>)
+
+6、git commit -- 提交
+常用：git commit + (<filename1> + <filename2> + ....) + (-a不需要add，直接提交) + (-m提交信息) + <message>
+      #提交暂存区所有(指定)内容到本地仓库中
+
+7、git config -- 查询 git 配置
+常用：1、git config --list
+       #显示git核心配置
+    2、git config -e + (--global)
+    git config --global user.name "zhangweiyi"
+    git config --global user.email zhangweiyi.123@bytedance.com
+    #编辑当前(全局)仓库git配置
+
+8、git diff -- 比较版本差异
+常用：1、git diff 
+        #当暂存区为空，对比工作区与最后一次commit的文件内容
+    #当暂存区不为空，对比工作区和暂存区中的文件内容
+    2、git diff --cached
+    #对比暂存区和最后一次commit的文件内容
+        3、git diff + <branch1> + <branch2(无此项默认为master分支)> + (可选参数，不详细展示区别内容) --stat
+    #对比两个分支最后一次commit的内容区别
+
+9、git fetch -- 克隆远程仓库的一个分支
+注：fetch是克隆一个分支，clone是克隆仓库，pull = fetch + merge
+    常用：1、git fetch + <repo> + <远程分支名> : <本地分支名>   
+    #将远程分支最新版本下载到本地
+    2、git diff <本地分支名>
+    #比较下载的分支内容与本地master内容区别
+    3、git merge <本地分支名>
+    #合并到本地master分支
+
+10、git pull -- 拉取远程仓库分支更新到本地（获取最新版本）
+常用：git pull + <repo> + <远程分支名> : <本地分支名(若无此项，代表拉取到本地当前分支)>
+
+11、git push -- 将本地分支版本上传到远程并合并
+常用：git push + (--force) + <repo> + <本地分支名> : <远程分支名(若分支同名可省略)>
+       #可用参数--force，若两者版本有差异则可强制推送
+  
+12、git merge -- 合并分支
+常用：git merge + <branchname>
+       #将分支合并到master分支
+
+13、git mv -- 移动或重命名
+git (-r) rm + <filename> -- (可选参数递归删除) 删除工作区和暂存区中该文件
+   git rm --cached + <filename> -- 仅删除暂存区中该文件
+
+14、git reset -- 回退版本
+    常用：1、git reset + <--soft / --mixed / --hard> + HEAD^ + (<filename>)+ (<version>)
+           #回退到(某个文件)所有内容的上一个(指定)版本
+       #HEAD：当前版本，HEAD^：上一个版本，HEAD^^：上上一个版本......
+           #当为HEAD时与rm --cached效果类似，用于取消add添加的内容
+           #--soft：仅改变引用，工作区与暂存区保持不变
+           #--mixed：默认，回退暂存区内容到上一次commit版本，工作区保持不变
+           #--hard：工作区与暂存区均改变
+    
+15、git remote -- 查看远程仓库，参数-v显示详细信息
+常用：1、git remote add <repo> + <远程仓库url>
+       #添加新的远程仓库
+    2、git remote rm + <repo> / git remote rename <old_name> <new_name>
+    #删除/重命名
